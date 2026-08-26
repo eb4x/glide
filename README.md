@@ -17,6 +17,12 @@ encouraged to file issues on the Github bug tracker of course.
 ![alt text](https://github.com/philn/glide/raw/main/screenshot.png "Glide screenshot")
 ![alt text](https://github.com/philn/glide/raw/main/audio-screenshot.png "Glide audio playback screenshot")
 
+Translations are managed using [Weblate](https://hosted.weblate.org). New contributions are very
+much welcome on [the project page](https://hosted.weblate.org/engage/glide/). Many thanks to the
+Weblate team for accepting Glide on their hosted instance.
+
+<a href="https://hosted.weblate.org/engage/glide/"><img src="https://hosted.weblate.org/widget/glide/svg-badge.svg?capitalize=1" alt="Translation status"></a>
+
 ## Installation
 
 Install it with Cargo:
