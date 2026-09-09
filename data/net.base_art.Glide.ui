@@ -280,14 +280,38 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;primary&gt;Right</property>
-                <property name="title" translatable="yes">Seek forward</property>
+                <property name="accelerator">&lt;primary&gt;Right Right</property>
+                <property name="title" translatable="yes">Seek forward 10 seconds</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;primary&gt;Left</property>
-                <property name="title" translatable="yes">Seek backward</property>
+                <property name="accelerator">&lt;primary&gt;Left Left</property>
+                <property name="title" translatable="yes">Seek backward 10 seconds</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">Up</property>
+                <property name="title" translatable="yes">Seek forward 1 minute</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">Down</property>
+                <property name="title" translatable="yes">Seek backward 1 minute</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">Page_Up</property>
+                <property name="title" translatable="yes">Seek forward 10 minutes</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">Page_Down</property>
+                <property name="title" translatable="yes">Seek backward 10 minutes</property>
               </object>
             </child>
             <child>
@@ -316,13 +340,13 @@ audio-volume-medium-symbolic</property>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">Page_Up</property>
+                <property name="accelerator">&lt;primary&gt;Page_Up</property>
                 <property name="title" translatable="yes">Increase playback speed</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">Page_Down</property>
+                <property name="accelerator">&lt;primary&gt;Page_Down</property>
                 <property name="title" translatable="yes">Decrease playback speed</property>
               </object>
             </child>

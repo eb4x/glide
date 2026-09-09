@@ -61,6 +61,7 @@ struct VideoPlayer {
     seek_forward_action: gio::SimpleAction,
     drag_seek_forward_action: gio::SimpleAction,
     seek_backward_action: gio::SimpleAction,
+    seek_action: gio::SimpleAction,
     subtitle_action: gio::SimpleAction,
     audio_visualization_action: gio::SimpleAction,
     audio_track_action: gio::SimpleAction,
@@ -130,6 +131,13 @@ impl VideoPlayer {
 
         let seek_backward_action = gio::SimpleAction::new_stateful("seek-backward", None, &false.to_variant());
         gtk_app.add_action(&seek_backward_action);
+
+        // Seek by a signed number of seconds, so one action serves every step
+        // size the keyboard offers: the accelerators bind detailed names like
+        // "app.seek(-10)". A detailed action name parses its parameter as int32,
+        // so the action must declare int32 or the activation is refused.
+        let seek_action = gio::SimpleAction::new("seek", Some(glib::VariantTy::INT32));
+        gtk_app.add_action(&seek_action);
 
         let open_media_action = gio::SimpleAction::new("open-media", None);
         gtk_app.add_action(&open_media_action);
@@ -251,6 +259,7 @@ impl VideoPlayer {
             seek_forward_action,
             drag_seek_forward_action,
             seek_backward_action,
+            seek_action,
             subtitle_action,
             audio_visualization_action,
             audio_track_action,
@@ -321,6 +330,22 @@ impl VideoPlayer {
         self.seek_backward_action.connect_change_state(|_, _| {
             with_video_player!(video_player {
                 video_player.player.seek(&SeekDirection::Backward(constants::SEEK_BACKWARD_OFFSET));
+            });
+        });
+
+        self.seek_action.connect_activate(|_, parameter| {
+            let seconds = match parameter.and_then(|p| p.get::<i32>()) {
+                Some(seconds) => seconds,
+                None => return,
+            };
+            let offset = gst::ClockTime::from_seconds(seconds.unsigned_abs() as u64);
+            let direction = if seconds.is_negative() {
+                SeekDirection::Backward(offset)
+            } else {
+                SeekDirection::Forward(offset)
+            };
+            with_video_player!(video_player {
+                video_player.player.seek(&direction);
             });
         });
 

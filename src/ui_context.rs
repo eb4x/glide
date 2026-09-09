@@ -190,6 +190,13 @@ impl UIContext {
                 ("pause", vec!["space"]),
                 ("seek-forward", vec!["<Primary>Right"]),
                 ("seek-backward", vec!["<Primary>Left"]),
+                // mpv's default seek steps, on the bare arrow and page keys
+                ("seek(10)", vec!["Right"]),
+                ("seek(-10)", vec!["Left"]),
+                ("seek(60)", vec!["Up"]),
+                ("seek(-60)", vec!["Down"]),
+                ("seek(600)", vec!["Page_Up"]),
+                ("seek(-600)", vec!["Page_Down"]),
                 ("audio-volume-increase", vec!["<Primary>Up"]),
                 ("audio-volume-decrease", vec!["<Primary>Down"]),
                 ("audio-mute", vec!["<Primary>m"]),
@@ -197,8 +204,9 @@ impl UIContext {
                 ("dump-pipeline", vec!["<Ctrl>d"]),
                 ("show-shortcuts", vec!["<Primary>question"]),
                 ("video-frame-step", vec!["<Primary>n"]),
-                ("speed-increase", vec!["Page_Up"]),
-                ("speed-decrease", vec!["Page_Down"]),
+                // Page_Up/Page_Down now seek, so speed moves onto Ctrl
+                ("speed-increase", vec!["<Primary>Page_Up"]),
+                ("speed-decrease", vec!["<Primary>Page_Down"]),
             ];
             for (action, accels) in accels_per_action.iter() {
                 app.set_accels_for_action(&format!("app.{action}"), accels);
