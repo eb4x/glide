@@ -578,7 +578,7 @@ impl VideoPlayer {
                 // FIXME: Ideally it'd be nice to show this on an OSD overlay?
                 let playback_rate = video_player.player.playback_rate();
                 if playback_rate != 1.0 {
-                    format!("{status} @ {playback_rate}.x")
+                    format!("{status} @ {playback_rate:.2}x")
                 } else {
                     status
                 }
