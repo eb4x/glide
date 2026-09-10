@@ -512,8 +512,16 @@ impl UIContext {
         self.video_renderer.set_paintable(Some(paintable));
     }
 
-    pub fn resize_video_renderer(&self, width: u32, height: u32) {
-        self.video_renderer.set_size_request(width as i32, height as i32);
+    pub fn resize_window_to_video(&self, width: u32, height: u32) {
+        let window = &self.window;
+        if window.is_fullscreen() || window.is_maximized() {
+            return;
+        }
+        // The header bar sits above the video, so make room for it too.
+        let (_, header_bar_size) = self.header_bar.preferred_size();
+        // A default size is only a wish: the user can still make the window
+        // smaller, and GTK keeps it within the screen.
+        window.set_default_size(width as i32, height as i32 + header_bar_size.height());
     }
 
     pub fn set_window_title(&self, title: &str) {

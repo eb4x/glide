@@ -653,7 +653,7 @@ impl VideoPlayer {
     }
 
     pub fn video_dimensions_changed(&self, width: u32, height: u32) {
-        self.ui_context.resize_video_renderer(width, height);
+        self.ui_context.resize_window_to_video(width, height);
     }
 
     pub fn media_info_updated(&self) {
